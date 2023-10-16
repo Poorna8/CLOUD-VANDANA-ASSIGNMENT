@@ -1,0 +1,102 @@
+# cloudvandana_assignment_Poorna Chander
+//programm start
+
+import java.util.Random;
+public class ShuffleArray {
+    public static void main(String[] args) {
+        int[] array = {1, 2, 3, 4, 5, 6, 7};
+        shuffleArray(array);
+        
+        // Print the shuffled array
+        for (int i = 0; i < array.length; i++) {
+            System.out.print(array[i] + " ");
+        }
+    }
+
+    public static void shuffleArray(int[] array) {
+        int n = array.length;
+        Random random = new Random();
+        
+        for (int i = n - 1; i > 0; i--) {
+            int j = random.nextInt(i + 1);
+            
+            // Swap array[i] and array[j]
+            int temp = array[i];
+            array[i] = array[j];
+            array[j] = temp;
+        }
+    }
+}
+
+
+2.Enter a Roman Number as input and convert it to an i nteger. ( Example: IX = 9)
+
+class Solution {
+    public int romanToInt(String s) {
+        Map<Character, Integer> map = new HashMap();
+            map.put('I', 1);
+            map.put('V', 5);
+            map.put('X', 10);
+            map.put('L', 50);
+            map.put('C', 100);
+            map.put('D', 500);
+            map.put('M', 1000);
+
+            int result = 0;
+            for (int i = 0; i < s.length(); i++) {
+                if (i > 0 && map.get(s.charAt(i)) > map.get(s.charAt(i - 1))) {
+                    result += map.get(s.charAt(i)) - 2 * map.get(s.charAt(i - 1));
+                } else {
+                    result += map.get(s.charAt(i));
+                }
+            }
+            return result;
+    }
+}
+
+3.Check if the input is pangram or not. (A pangram is a sentence that contains all the 
+Alphebets from A to Z
+
+import java.util.Scanner;
+
+public class PangramCheck {
+    public static void main(String[] args) {
+        Scanner scanner = new Scanner(System.in);
+        System.out.print("Enter a sentence: ");
+        String input = scanner.nextLine();
+        scanner.close();
+
+        if (isPangram(input)) {
+            System.out.println("The input is a pangram.");
+        } else {
+            System.out.println("The input is not a pangram.");
+        }
+    }
+
+    public static boolean isPangram(String sentence) {
+        // Create an array to mark the presence of each letter
+        boolean[] alphabet = new boolean[26];
+
+        // Convert the sentence to lowercase to handle both cases
+        sentence = sentence.toLowerCase();
+
+        for (int i = 0; i < sentence.length(); i++) {
+            char currentChar = sentence.charAt(i);
+
+            // Check if the character is an alphabet letter
+            if ('a' <= currentChar && currentChar <= 'z') {
+                int index = currentChar - 'a';
+                alphabet[index] = true;
+            }
+        }
+
+        // Check if all letters from 'a' to 'z' are marked as true
+        for (boolean letterPresent : alphabet) {
+            if (!letterPresent) {
+                return false;
+            }
+        }
+
+        return true;
+    }
+}
